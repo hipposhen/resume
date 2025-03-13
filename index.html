@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>沈子明 | 项目管理专家</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-color-rgb: 37, 99, 235;
+      --secondary-color: #3b82f6;
+      --accent-color: #f59e0b;
+      --text-color: #1f2937;
+      --text-light: #4b5563;
+      --background-color: #ffffff;
+      --background-alt: #f9fafb;
+      --border-color: #e5e7eb;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius: 12px;
+      --max-width: 1200px;
+      --header-height: 70px;
+      --background-color-rgb: 255, 255, 255;
+    }
+
+    .dark-theme {
+      --primary-color: #3b82f6;
+      --primary-color-rgb: 59, 130, 246;
+      --secondary-color: #60a5fa;
+      --accent-color: #fbbf24;
+      --text-color: #f9fafb;
+      --text-light: #d1d5db;
+      --background-color: #111827;
+      --background-alt: #1f2937;
+      --border-color: #374151;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+      --background-color-rgb: 17, 24, 39;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+      transition: var(--transition);
+      letter-spacing: 0.025em;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 头部样式 */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(var(--background-color-rgb), 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      transition: var(--transition);
+      height: var(--header-height);
+    }
+
+    header.scrolled {
+      background-color: var(--background-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .logo a:after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .logo a:hover:after {
+      width: 100%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding: 5px 0;
+    }
+
+    nav ul li a:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover:after {
+      width: 100%;
+    }
+
+    .theme-toggle button, .mobile-menu-toggle button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+    }
+
+    /* 英雄区域样式 */
+    .hero {
+      padding: 180px 0 120px;
+      text-align: center;
+      background-color: var(--background-alt);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 100%);
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero .intro {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px rgba(var(--primary-color-rgb), 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition);
+    }
+
+    .cta-button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(var(--primary-color-rgb), 0.3);
+    }
+
+    .cta-button:hover:before {
+      left: 100%;
+    }
+
+    /* 关于我部分 */
+    .about {
+      padding: 80px 0;
+    }
+
+    .about h2, .core-strengths h2, .highlighted-projects h2, .skills-certifications h2, .contact h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      color: var(--primary-color);
+      position: relative;
+      padding-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .about h2:after, .core-strengths h2:after, .highlighted-projects h2:after, .skills-certifications h2:after, .contact h2:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .profile-image {
+      text-align: center;
+    }
+
+    .profile-image img {
+      max-width: 80%;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .profile-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+    }
+
+    .about-details {
+      margin-top: 30px;
+    }
+
+    .detail-item {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      min-width: 100px;
+    }
+
+    /* 工作经历部分 */
+    .work-experience {
+      padding: 40px 0;
+      background-color: var(--background-alt);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50px;
+      margin-left: -1px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px 10px 70px;
+      position: relative;
+      background-color: inherit;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+
+    .timeline-content h4 {
+      margin-bottom: 10px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .achievement-list {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .achievement-list li {
+      margin-bottom: 5px;
+    }
+
+    /* 教育背景部分 */
+    .education {
+      padding: 40px 0;
+    }
+
+    .education-card {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .education-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    .education-details h3 {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .education-period {
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+
+    /* 核心优势部分 */
+    .core-strengths {
+      padding: 80px 0;
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .strength-card {
+      background-color: var(--background-alt);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .strength-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .strength-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .strength-card h3:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      opacity: 0.2;
+    }
+
+    .strength-card p {
+      line-height: 1.8;
+    }
+
+    /* 项目部分 */
+    .highlighted-projects {
+      padding: 80px 0;
+      background-color: var(--background-alt);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background-color: var(--background-color);
+      padding: 40px 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 4px solid var(--primary-color);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card.hovered {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .project-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .project-highlights {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .project-highlights li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+    }
+
+    .project-highlights li:before {
+      content: "✓";
+      color: var(--primary-color);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* 技能与认证部分 */
+    .skills-certifications {
+      padding: 80px 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .skill-card {
+      background-color: var(--background-alt);
+      padding: 40px 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-card:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 100%);
+      z-index: 0;
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .skill-icon:after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      opacity: 0.1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .skill-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skill-card p {
+      position: relative;
+      z-index: 1;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    /* 联系部分 */
+    .contact {
+      padding: 100px 0;
+      background-color: var(--background-alt);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 100%);
+      z-index: 0;
+    }
+
+    .contact .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 30px;
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+
+    /* 移动菜单样式 */
+    nav.active {
+      display: block;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      width: 100%;
+      background-color: var(--background-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    nav.active ul {
+      flex-direction: column;
+    }
+
+    nav.active ul li {
+      margin: 0 0 15px 0;
+    }
+
+    .mobile-menu-toggle button.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle button.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle button.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 992px) {
+      .strengths-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .mobile-menu-toggle button {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+      }
+      
+      .mobile-menu-toggle button span {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-color);
+        transition: var(--transition);
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.2rem;
+      }
+      
+      .hero .intro {
+        font-size: 1rem;
+      }
+      
+      .strengths-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .profile-image {
+        margin-bottom: 30px;
+      }
+      
+      .profile-image img {
+        max-width: 200px;
+        width: 80%;
+        height: auto;
+        object-fit: cover;
+      }
+      
+      .about-text {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .profile-image img {
+        max-width: 180px;
+        width: 80%;
+        height: auto;
+      }
+    }
+
+    /* 语言切换按钮样式 */
+    .language-toggle {
+      display: flex;
+      margin-right: 15px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 5px 10px;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .lang-btn:first-child {
+      border-radius: 4px 0 0 4px;
+    }
+
+    .lang-btn:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .language-toggle {
+        margin-right: 10px;
+      }
+      
+      .lang-btn {
+        padding: 3px 8px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="/" data-i18n="logo">沈子明</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home" data-i18n="nav.home">首页</a></li>
+          <li><a href="#about" data-i18n="nav.about">关于我</a></li>
+          <li><a href="#strengths" data-i18n="nav.strengths">核心优势</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">项目</a></li>
+          <li><a href="#skills" data-i18n="nav.skills">技能</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">联系我</a></li>
+        </ul>
+      </nav>
+      <div class="language-toggle">
+        <button id="lang-zh" class="lang-btn active">中</button>
+        <button id="lang-en" class="lang-btn">EN</button>
+      </div>
+      <div class="theme-toggle">
+        <button id="theme-toggle-btn" aria-label="切换深色/浅色模式">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-menu-toggle">
+        <button id="mobile-menu-btn" aria-label="打开菜单">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <!-- 首页 - 简化版 -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1 data-i18n="hero.title">沈子明</h1>
+        <h2 data-i18n="hero.subtitle">项目管理专家 | PMP认证 | AI赋能</h2>
+        <p class="intro" data-i18n="hero.intro">
+          我是一位拥有丰富大型项目操作经验的项目管理专家，专注于资源整合与商务谈判。
+        </p>
+        <a href="#contact" class="cta-button" data-i18n="hero.cta">联系我</a>
+      </div>
+    </section>
+
+    <!-- 核心优势部分 -->
+    <section id="strengths" class="core-strengths">
+      <div class="container">
+        <h2 data-i18n="strengths.title">核心优势</h2>
+        <div class="strengths-grid">
+          <div class="strength-card">
+            <h3 data-i18n="strengths.card1.title">大型项目操作经验</h3>
+            <p data-i18n="strengths.card1.content">主导广州国际车展(9-11届)、亚运会等大型活动，覆盖电子票务方案设计、渠道开发、现场管理全流程，累计服务超100万人次观众，确保活动零事故交付。</p>
+          </div>
+          <div class="strength-card">
+            <h3 data-i18n="strengths.card2.title">资源整合与商务谈判能力</h3>
+            <p data-i18n="strengths.card2.content">曾与中国联通、工商银行等央企达成深度合作，完成种子轮融资数百万；熟悉跨部门协作与商务谈判，能有效联动设计、采购、施工等各环节，确保项目高效推进。</p>
+          </div>
+          <div class="strength-card">
+            <h3 data-i18n="strengths.card3.title">PMP认证项目管理专家</h3>
+            <p data-i18n="strengths.card3.content">擅长从0到1搭建项目(区块链版权平台)、产品设计经验；具备PMBOK标准项目管理方法论，能有效控制项目风险与进度。</p>
+          </div>
+          <div class="strength-card">
+            <h3 data-i18n="strengths.card4.title">AI赋能的工作效率提升</h3>
+            <p data-i18n="strengths.card4.content">熟练运用ChatGPT等AI工具优化商业方案撰写、客户需求分析及流程自动化，能将复杂信息快速转化为专业提案，提升工作效率；善于建立结构化知识库，可快速适应会展行业专业需求，为客户提供数据支持和创意解决方案。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 精选项目部分 -->
+    <section id="projects" class="highlighted-projects">
+      <div class="container">
+        <h2 data-i18n="projects.title">精选项目</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-icon">🚗</div>
+            <h3 data-i18n="projects.card1.title">广州国际汽车展览会</h3>
+            <p data-i18n="projects.card1.content">负责第9-11届广州国际汽车展览会电子门票系统解决方案，包括网络平台运营、渠道开拓、门票销售及现场管理，服务超100万人次观众。</p>
+            <ul class="project-highlights">
+              <li data-i18n="projects.card1.highlight1">设计并实施了完整的电子票务系统，提高了票务处理效率</li>
+              <li data-i18n="projects.card1.highlight2">开发多元化销售渠道，提升票务销售量30%以上</li>
+              <li data-i18n="projects.card1.highlight3">优化现场取票流程，减少观众等待时间，提升用户体验</li>
+              <li data-i18n="projects.card1.highlight4">实现零事故交付，获得组委会高度评价</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <div class="project-icon">🏅</div>
+            <h3 data-i18n="projects.card2.title">2010广州亚运会门票系统</h3>
+            <p data-i18n="projects.card2.content">与亚组委共同参与票务政策制订、场馆群票务管理、线下门票分销渠道管理、场馆座席数据管理等，确保亚运会票务系统顺利运行。</p>
+            <ul class="project-highlights">
+              <li data-i18n="projects.card2.highlight1">协助制定适合大型体育赛事的票务政策</li>
+              <li data-i18n="projects.card2.highlight2">管理多个场馆的票务系统，确保各场馆间数据同步</li>
+              <li data-i18n="projects.card2.highlight3">建立高效的线下分销网络，覆盖广州及周边城市</li>
+              <li data-i18n="projects.card2.highlight4">精确管理场馆座席数据，确保票务信息准确无误</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <div class="project-icon">⛓️</div>
+            <h3 data-i18n="projects.card3.title">糖纷娱乐区块链平台</h3>
+            <p data-i18n="projects.card3.content">开发基于区块链的版权平台，实现全流程数字化管理，与央企达成战略合作，成功引入多家知名企业成为股东，融资额达数百万元。</p>
+            <ul class="project-highlights">
+              <li data-i18n="projects.card3.highlight1">从0到1构建区块链版权平台，解决行业版权保护痛点</li>
+              <li data-i18n="projects.card3.highlight2">实现版权登记、交易、追溯全流程数字化管理</li>
+              <li data-i18n="projects.card3.highlight3">促成与中国联通、工商银行等央企的战略合作</li>
+              <li data-i18n="projects.card3.highlight4">成功完成种子轮融资，融资额达数百万元</li>
+              <li data-i18n="projects.card3.highlight5">获得广东金融高新区"区块链+金融"科技企业认定</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能与认证部分 -->
+    <section id="skills" class="skills-certifications">
+      <div class="container">
+        <h2 data-i18n="skills.title">技能与认证</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">📊</div>
+            <h3 data-i18n="skills.card1.title">PMP认证</h3>
+            <p data-i18n="skills.card1.content">项目管理专业人士资格认证</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🤖</div>
+            <h3 data-i18n="skills.card2.title">Microsoft生成式AI认证</h3>
+            <p data-i18n="skills.card2.content">AI工具应用与流程优化</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🌐</div>
+            <h3 data-i18n="skills.card3.title">网络工程师(三级)</h3>
+            <p data-i18n="skills.card3.content">网络系统规划与管理</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于我部分 - 包含个人照片、详细介绍、工作经历和教育背景 -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2 data-i18n="about.title">关于我</h2>
+        <div class="about-content">
+          <div class="profile-image">
+            <img src="profile-photo.jpg" alt="沈子明的照片" width="300" height="300" onerror="this.src='https://via.placeholder.com/300?text=沈子明';this.onerror='';">
+          </div>
+          <div class="about-text">
+            <p data-i18n="about.intro1">您好，我是沈子明，一位拥有多年项目管理经验的专业人士。我毕业于华南理工大学电子商务专业，获得管理学士学位。</p>
+            <p data-i18n="about.intro2">在职业生涯中，我主导过广州国际车展、亚运会等大型活动的电子票务系统，并成功从0到1搭建了区块链版权平台。我擅长资源整合与商务谈判，曾与多家央企达成战略合作，并完成种子轮融资数百万元。</p>
+            <p data-i18n="about.intro3">作为PMP认证的项目管理专家，我熟悉PMBOK标准项目管理方法论，能有效控制项目风险与进度。同时，我也是AI技术的积极拥抱者，熟练运用ChatGPT等AI工具优化工作流程，提升效率。</p>
+            <p data-i18n="about.intro4">我相信，专业的项目管理能力结合创新思维，可以为企业带来实质性的价值提升。</p>
+            
+            <div class="about-details">
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="about.detail.name">姓名：</span>
+                <span class="detail-value" data-i18n="about.detail.name.value">沈子明</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="about.detail.age">年龄：</span>
+                <span class="detail-value">41</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="about.detail.location">所在地：</span>
+                <span class="detail-value" data-i18n="about.detail.location.value">广州</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="about.detail.phone">电话：</span>
+                <span class="detail-value">13556159223</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="about.detail.email">邮箱：</span>
+                <span class="detail-value">179328963@qq.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 教育背景部分 -->
+        <div class="education">
+          <h3 style="text-align: center; margin: 40px 0 20px; color: var(--primary-color);" data-i18n="education.title">教育背景</h3>
+          <div class="education-card">
+            <div class="education-icon">🎓</div>
+            <div class="education-details">
+              <h3 data-i18n="education.school">华南理工大学</h3>
+              <p class="education-period" data-i18n="education.period">2002.09 - 2006.07</p>
+              <p class="education-major" data-i18n="education.major">电子商务 | 本科 | 管理学士学位</p>
+              <p class="education-achievements" data-i18n="education.achievements">CET-4</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 工作经历部分 -->
+        <div class="work-experience">
+          <h3 style="text-align: center; margin: 40px 0 20px; color: var(--primary-color);" data-i18n="work.title">工作经历</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date" data-i18n="work.job1.period">2024.05 – 2024.11</div>
+              <div class="timeline-content">
+                <h3 data-i18n="work.job1.company">IFF国际香精香料公司</h3>
+                <h4 data-i18n="work.job1.title">样品运输管理员</h4>
+                <p data-i18n="work.job1.description">负责公司各类香精香料样品的国内运输管理，包括订单处理、物流协调、库存跟踪等。</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date" data-i18n="work.job2.period">2018.04 – 2022.02</div>
+              <div class="timeline-content">
+                <h3 data-i18n="work.job2.company">佛山方糖娱乐信息技术有限公司</h3>
+                <h4 data-i18n="work.job2.title">项目经理</h4>
+                <p data-i18n="work.job2.description">负责企业资源洽谈、项目申报、项目融资及企业挂牌全流程工作</p>
+                <ul class="achievement-list">
+                  <li data-i18n="work.job2.achievement1">建立"糖纷娱乐区块链平台"，开发基于区块链的版权平台，实现全流程数字化管理</li>
+                  <li data-i18n="work.job2.achievement2">与央企达成战略合作，包括中国联通佛山分公司、工商银行佛山分行</li>
+                  <li data-i18n="work.job2.achievement3">主导企业种子轮融资，成功引入多家知名企业成为股东，融资额达数百万元</li>
+                  <li data-i18n="work.job2.achievement4">促成企业通过广东金融高新区"区块链+金融"科技企业认定，获政府扶持资金</li>
+                  <li data-i18n="work.job2.achievement5">主持公司在广东股权交易中心成功挂牌，提升企业融资能力与市场认可度</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date" data-i18n="work.job3.period">2012.12 – 2017.09</div>
+              <div class="timeline-content">
+                <h3 data-i18n="work.job3.company">广州阿瑞特信息科技有限公司</h3>
+                <h4 data-i18n="work.job3.title">商务经理</h4>
+                <p data-i18n="work.job3.description">负责大型展会项目全流程统筹，专注电子门票系统解决方案</p>
+                <ul class="achievement-list">
+                  <li data-i18n="work.job3.achievement1"><strong data-i18n="work.job3.project1">第十一届广州国际汽车展览会：</strong><span data-i18n="work.job3.project1.desc">负责电子门票网络平台运营、渠道开拓、门票销售及现场管理</span></li>
+                  <li data-i18n="work.job3.achievement2"><strong data-i18n="work.job3.project2">第十届广州国际汽车展览会：</strong><span data-i18n="work.job3.project2.desc">负责本次投标及票务解决方案的制定</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date" data-i18n="work.job4.period">2009.10 – 2012.11</div>
+              <div class="timeline-content">
+                <h3 data-i18n="work.job4.company">广东城市在线票务有限公司</h3>
+                <h4 data-i18n="work.job4.title">商务经理</h4>
+                <p data-i18n="work.job4.description">全面负责商务部团队的组建、人员招聘、新人培训以及制定部门业绩计划，带领团队伙伴共同完成计划目标</p>
+                <ul class="achievement-list">
+                  <li data-i18n="work.job4.achievement1"><strong data-i18n="work.job4.project1">第九届广州国际汽车展览会：</strong><span data-i18n="work.job4.project1.desc">负责本次门票销售渠道开拓、市场宣传、现场TDM自助取票机管理</span></li>
+                  <li data-i18n="work.job4.achievement2"><strong data-i18n="work.job4.project2">2010广州亚运会门票系统服务外包：</strong><span data-i18n="work.job4.project2.desc">与亚组委共同参与票务政策制订、场馆群票务管理、线下门票分销渠道管理、场馆座席数据管理等</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date" data-i18n="work.job5.period">2007.03 – 2009.07</div>
+              <div class="timeline-content">
+                <h3 data-i18n="work.job5.company">广州进鼎光电信息服务有限公司</h3>
+                <h4 data-i18n="work.job5.title">销售经理</h4>
+                <p data-i18n="work.job5.description">负责项目信息的收集、方案和报价的提交或投标,并推进项目的签订；定期维护现有客户,挖掘潜在客户,与客户保持良好的联系；负责销售团队的组建、新员工培训、销售任务分解,带领团队完成年度销售目标。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 data-i18n="contact.title">联系我</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <p data-i18n="contact.phone">13556159223</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <p data-i18n="contact.email">179328963@qq.com</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <p data-i18n="contact.location">广州</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚部分 -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3 data-i18n="footer.name">沈子明</h3>
+          <p data-i18n="footer.title">项目管理专家 | PMP认证 | AI赋能</p>
+        </div>
+        <div class="footer-links">
+          <h4 data-i18n="footer.quicklinks">快速链接</h4>
+          <ul>
+            <li><a href="#home" data-i18n="nav.home">首页</a></li>
+            <li><a href="#about" data-i18n="nav.about">关于我</a></li>
+            <li><a href="#strengths" data-i18n="nav.strengths">核心优势</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">项目</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">技能</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4 data-i18n="footer.contactinfo">联系方式</h4>
+          <p data-i18n="footer.phone">📱 13556159223</p>
+          <p data-i18n="footer.email">📧 179328963@qq.com</p>
+          <p data-i18n="footer.location">📍 广州</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer.copyright">&copy; 2025 沈子明. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 修改DOMContentLoaded事件处理，确保不会重复绑定
+    document.addEventListener('DOMContentLoaded', function() {
+      // 主题切换功能
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // 检查本地存储中的主题偏好
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else if (currentTheme === 'light') {
+        document.body.classList.remove('dark-theme');
+      } else if (prefersDarkScheme.matches) {
+        document.body.classList.add('dark-theme');
+      }
+      
+      // 切换主题
+      themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        
+        // 保存主题偏好到本地存储
+        if (document.body.classList.contains('dark-theme')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      });
+      
+      // 移动端菜单切换
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const nav = document.querySelector('nav');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+      
+      // 平滑滚动到锚点
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            
+            // 如果移动菜单是打开的，点击后关闭它
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              mobileMenuBtn.classList.remove('active');
+            }
+          }
+        });
+      });
+      
+      // 项目卡片悬停效果
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('hovered');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('hovered');
+        });
+      });
+      
+      // 滚动时添加导航栏样式
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // 语言切换功能
+      initLanguageToggle();
+    });
+
+    // 分离语言切换功能为独立函数
+    function initLanguageToggle() {
+      // 语言数据
+      const i18n = {
+        'zh': {
+          'logo': '沈子明',
+          'nav.home': '首页',
+          'nav.about': '关于我',
+          'nav.strengths': '核心优势',
+          'nav.projects': '项目',
+          'nav.skills': '技能',
+          'nav.contact': '联系我',
+          'hero.title': '沈子明',
+          'hero.subtitle': '项目管理专家 | PMP认证 | AI赋能',
+          'hero.intro': '我是一位拥有丰富大型项目操作经验的项目管理专家，专注于资源整合与商务谈判。',
+          'hero.cta': '联系我',
+          'strengths.title': '核心优势',
+          'strengths.card1.title': '大型项目操作经验',
+          'strengths.card1.content': '主导广州国际车展(9-11届)、亚运会等大型活动，覆盖电子票务方案设计、渠道开发、现场管理全流程，累计服务超100万人次观众，确保活动零事故交付。',
+          'strengths.card2.title': '资源整合与商务谈判能力',
+          'strengths.card2.content': '曾与中国联通、工商银行等央企达成深度合作，完成种子轮融资数百万；熟悉跨部门协作与商务谈判，能有效联动设计、采购、施工等各环节，确保项目高效推进。',
+          'strengths.card3.title': 'PMP认证项目管理专家',
+          'strengths.card3.content': '擅长从0到1搭建项目(区块链版权平台)、产品设计经验；具备PMBOK标准项目管理方法论，能有效控制项目风险与进度。',
+          'strengths.card4.title': 'AI赋能的工作效率提升',
+          'strengths.card4.content': '熟练运用ChatGPT等AI工具优化商业方案撰写、客户需求分析及流程自动化，能将复杂信息快速转化为专业提案，提升工作效率；善于建立结构化知识库，可快速适应会展行业专业需求，为客户提供数据支持和创意解决方案。',
+          'projects.title': '精选项目',
+          'projects.card1.title': '广州国际汽车展览会',
+          'projects.card1.content': '负责第9-11届广州国际汽车展览会电子门票系统解决方案，包括网络平台运营、渠道开拓、门票销售及现场管理，服务超100万人次观众。',
+          'projects.card1.highlight1': '设计并实施了完整的电子票务系统，提高了票务处理效率',
+          'projects.card1.highlight2': '开发多元化销售渠道，提升票务销售量30%以上',
+          'projects.card1.highlight3': '优化现场取票流程，减少观众等待时间，提升用户体验',
+          'projects.card1.highlight4': '实现零事故交付，获得组委会高度评价',
+          'projects.card2.title': '2010广州亚运会门票系统',
+          'projects.card2.content': '与亚组委共同参与票务政策制订、场馆群票务管理、线下门票分销渠道管理、场馆座席数据管理等，确保亚运会票务系统顺利运行。',
+          'projects.card2.highlight1': '协助制定适合大型体育赛事的票务政策',
+          'projects.card2.highlight2': '管理多个场馆的票务系统，确保各场馆间数据同步',
+          'projects.card2.highlight3': '建立高效的线下分销网络，覆盖广州及周边城市',
+          'projects.card2.highlight4': '精确管理场馆座席数据，确保票务信息准确无误',
+          'projects.card3.title': '糖纷娱乐区块链平台',
+          'projects.card3.content': '开发基于区块链的版权平台，实现全流程数字化管理，与央企达成战略合作，成功引入多家知名企业成为股东，融资额达数百万元。',
+          'projects.card3.highlight1': '从0到1构建区块链版权平台，解决行业版权保护痛点',
+          'projects.card3.highlight2': '实现版权登记、交易、追溯全流程数字化管理',
+          'projects.card3.highlight3': '促成与中国联通、工商银行等央企的战略合作',
+          'projects.card3.highlight4': '成功完成种子轮融资，融资额达数百万元',
+          'projects.card3.highlight5': '获得广东金融高新区"区块链+金融"科技企业认定',
+          'skills.title': '技能与认证',
+          'skills.card1.title': 'PMP认证',
+          'skills.card1.content': '项目管理专业人士资格认证',
+          'skills.card2.title': 'Microsoft生成式AI认证',
+          'skills.card2.content': 'AI工具应用与流程优化',
+          'skills.card3.title': '网络工程师(三级)',
+          'skills.card3.content': '网络系统规划与管理',
+          'about.title': '关于我',
+          'about.intro1': '您好，我是沈子明，一位拥有多年项目管理经验的专业人士。我毕业于华南理工大学电子商务专业，获得管理学士学位。',
+          'about.intro2': '在职业生涯中，我主导过广州国际车展、亚运会等大型活动的电子票务系统，并成功从0到1搭建了区块链版权平台。我擅长资源整合与商务谈判，曾与多家央企达成战略合作，并完成种子轮融资数百万元。',
+          'about.intro3': '作为PMP认证的项目管理专家，我熟悉PMBOK标准项目管理方法论，能有效控制项目风险与进度。同时，我也是AI技术的积极拥抱者，熟练运用ChatGPT等AI工具优化工作流程，提升效率。',
+          'about.intro4': '我相信，专业的项目管理能力结合创新思维，可以为企业带来实质性的价值提升。',
+          'about.detail.name': '姓名：',
+          'about.detail.name.value': '沈子明',
+          'about.detail.age': '年龄：',
+          'about.detail.location': '所在地：',
+          'about.detail.location.value': '广州',
+          'about.detail.phone': '电话：',
+          'about.detail.email': '邮箱：',
+          'education.title': '教育背景',
+          'education.school': '华南理工大学',
+          'education.period': '2002.09 - 2006.07',
+          'education.major': '电子商务 | 本科 | 管理学士学位',
+          'education.achievements': 'CET-4',
+          'work.title': '工作经历',
+          'contact.title': '联系我',
+          'footer.copyright': '© 2025 沈子明. 保留所有权利.',
+          'work.job1.period': '2024.05 – 2024.11',
+          'work.job1.company': 'IFF国际香精香料公司',
+          'work.job1.title': '样品运输管理员',
+          'work.job1.description': '负责公司各类香精香料样品的国内运输管理，包括订单处理、物流协调、库存跟踪等。',
+          'work.job2.period': '2018.04 – 2022.02',
+          'work.job2.company': '佛山方糖娱乐信息技术有限公司',
+          'work.job2.title': '项目经理',
+          'work.job2.description': '负责企业资源洽谈、项目申报、项目融资及企业挂牌全流程工作',
+          'work.job2.achievement1': '建立"糖纷娱乐区块链平台"，开发基于区块链的版权平台，实现全流程数字化管理',
+          'work.job2.achievement2': '与央企达成战略合作，包括中国联通佛山分公司、工商银行佛山分行',
+          'work.job2.achievement3': '主导企业种子轮融资，成功引入多家知名企业成为股东，融资额达数百万元',
+          'work.job2.achievement4': '促成企业通过广东金融高新区"区块链+金融"科技企业认定，获政府扶持资金',
+          'work.job2.achievement5': '主持公司在广东股权交易中心成功挂牌，提升企业融资能力与市场认可度',
+          'work.job3.period': '2012.12 – 2017.09',
+          'work.job3.company': '广州阿瑞特信息科技有限公司',
+          'work.job3.title': '商务经理',
+          'work.job3.description': '负责大型展会项目全流程统筹，专注电子门票系统解决方案',
+          'work.job3.achievement1': '',
+          'work.job3.project1': '第十一届广州国际汽车展览会：',
+          'work.job3.project1.desc': '负责电子门票网络平台运营、渠道开拓、门票销售及现场管理',
+          'work.job3.achievement2': '',
+          'work.job3.project2': '第十届广州国际汽车展览会：',
+          'work.job3.project2.desc': '负责本次投标及票务解决方案的制定',
+          'work.job4.period': '2009.10 – 2012.11',
+          'work.job4.company': '广东城市在线票务有限公司',
+          'work.job4.title': '商务经理',
+          'work.job4.description': '全面负责商务部团队的组建、人员招聘、新人培训以及制定部门业绩计划，带领团队伙伴共同完成计划目标',
+          'work.job4.achievement1': '',
+          'work.job4.project1': '第九届广州国际汽车展览会：',
+          'work.job4.project1.desc': '负责本次门票销售渠道开拓、市场宣传、现场TDM自助取票机管理',
+          'work.job4.achievement2': '',
+          'work.job4.project2': '2010广州亚运会门票系统服务外包：',
+          'work.job4.project2.desc': '与亚组委共同参与票务政策制订、场馆群票务管理、线下门票分销渠道管理、场馆座席数据管理等',
+          'work.job5.period': '2007.03 – 2009.07',
+          'work.job5.company': '广州进鼎光电信息服务有限公司',
+          'work.job5.title': '销售经理',
+          'work.job5.description': '负责项目信息的收集、方案和报价的提交或投标,并推进项目的签订；定期维护现有客户,挖掘潜在客户,与客户保持良好的联系；负责销售团队的组建、新员工培训、销售任务分解,带领团队完成年度销售目标.',
+          'contact.phone': '13556159223',
+          'contact.email': '179328963@qq.com',
+          'contact.location': '广州',
+          'footer.name': '沈子明',
+          'footer.title': '项目管理专家 | PMP认证 | AI赋能',
+          'footer.quicklinks': '快速链接',
+          'footer.contactinfo': '联系方式',
+          'footer.phone': '📱 13556159223',
+          'footer.email': '📧 179328963@qq.com',
+          'footer.location': '📍 广州'
+        },
+        'en': {
+          'logo': 'Jacky',
+          'nav.home': 'Home',
+          'nav.about': 'About',
+          'nav.strengths': 'Strengths',
+          'nav.projects': 'Projects',
+          'nav.skills': 'Skills',
+          'nav.contact': 'Contact',
+          'hero.title': 'Jacky',
+          'hero.subtitle': 'Project Management Expert | PMP Certified | AI Enabled',
+          'hero.intro': 'I am a project management expert with extensive experience in large-scale projects, focusing on resource integration and business negotiation.',
+          'hero.cta': 'Contact Me',
+          'strengths.title': 'Core Strengths',
+          'strengths.card1.title': 'Large-scale Project Experience',
+          'strengths.card1.content': 'Led the Guangzhou International Auto Show (9th-11th) and Asian Games, covering e-ticketing solution design, channel development, and on-site management, serving over 1 million visitors with zero-incident delivery.',
+          'strengths.card2.title': 'Resource Integration & Negotiation',
+          'strengths.card2.content': 'Established deep cooperation with state-owned enterprises like China Unicom and ICBC, completed seed round financing of millions; proficient in cross-department collaboration and business negotiation.',
+          'strengths.card3.title': 'PMP Certified Expert',
+          'strengths.card3.content': 'Skilled in building projects from 0 to 1 (blockchain copyright platform); equipped with PMBOK standard project management methodology to effectively control project risks and progress.',
+          'strengths.card4.title': 'AI-Enhanced Efficiency',
+          'strengths.card4.content': 'Proficient in using AI tools like ChatGPT to optimize business proposal writing, customer needs analysis, and process automation; able to quickly transform complex information into professional proposals.',
+          'projects.title': 'Featured Projects',
+          'projects.card1.title': 'Guangzhou International Auto Show',
+          'projects.card1.content': 'Responsible for the e-ticketing system solution for the 9th-11th Guangzhou International Auto Show, including online platform operation, channel development, ticket sales and on-site management, serving over 1 million visitors.',
+          'projects.card1.highlight1': 'Designed and implemented a complete e-ticketing system, improving ticket processing efficiency',
+          'projects.card1.highlight2': 'Developed diversified sales channels, increasing ticket sales by over 30%',
+          'projects.card1.highlight3': 'Optimized on-site ticket collection process, reducing waiting time and enhancing user experience',
+          'projects.card1.highlight4': 'Achieved zero-incident delivery, highly praised by the organizing committee',
+          'projects.card2.title': '2010 Guangzhou Asian Games Ticketing System',
+          'projects.card2.content': 'Participated in ticket policy formulation, venue group ticket management, offline ticket distribution channel management, and venue seating data management with the Asian Games Organizing Committee.',
+          'projects.card2.highlight1': 'Assisted in developing ticketing policies suitable for large-scale sports events',
+          'projects.card2.highlight2': 'Managed ticketing systems for multiple venues, ensuring data synchronization between venues',
+          'projects.card2.highlight3': 'Established efficient offline distribution networks covering Guangzhou and surrounding cities',
+          'projects.card2.highlight4': 'Precisely managed venue seating data to ensure accurate ticket information',
+          'projects.card3.title': 'Tangfen Entertainment Blockchain Platform',
+          'projects.card3.content': 'Developed a blockchain-based copyright platform, achieving full-process digital management, reached strategic cooperation with state-owned enterprises, and successfully introduced several well-known companies as shareholders with financing of millions.',
+          'projects.card3.highlight1': 'Built a blockchain copyright platform from 0 to 1, solving industry copyright protection pain points',
+          'projects.card3.highlight2': 'Implemented digital management for the entire process of copyright registration, trading, and tracing',
+          'projects.card3.highlight3': 'Facilitated strategic cooperation with state-owned enterprises like China Unicom and ICBC',
+          'projects.card3.highlight4': 'Successfully completed seed round financing of millions',
+          'projects.card3.highlight5': 'Recognized as a "Blockchain + Finance" technology enterprise by Guangdong Financial High-tech Zone',
+          'skills.title': 'Skills & Certifications',
+          'skills.card1.title': 'PMP Certification',
+          'skills.card1.content': 'Project Management Professional',
+          'skills.card2.title': 'Microsoft Generative AI Certification',
+          'skills.card2.content': 'AI Tools Application & Process Optimization',
+          'skills.card3.title': 'Network Engineer (Level 3)',
+          'skills.card3.content': 'Network System Planning & Management',
+          'about.title': 'About Me',
+          'about.intro1': 'Hello, I am Jacky, a professional with many years of project management experience. I graduated from South China University of Technology with a bachelor\'s degree in E-commerce.',
+          'about.intro2': 'In my career, I have led electronic ticketing systems for major events such as the Guangzhou International Auto Show and Asian Games, and successfully built a blockchain copyright platform from 0 to 1. I excel at resource integration and business negotiation, having established strategic partnerships with multiple state-owned enterprises and completed seed round financing of millions.',
+          'about.intro3': 'As a PMP certified project management expert, I am familiar with PMBOK standard project management methodology and can effectively control project risks and progress. I am also an active adopter of AI technology, proficient in using tools like ChatGPT to optimize workflows and improve efficiency.',
+          'about.intro4': 'I believe that professional project management capabilities combined with innovative thinking can bring substantial value to enterprises.',
+          'about.detail.name': 'Name:',
+          'about.detail.name.value': 'Jacky',
+          'about.detail.age': 'Age:',
+          'about.detail.location': 'Location:',
+          'about.detail.location.value': 'Guangzhou',
+          'about.detail.phone': 'Phone:',
+          'about.detail.email': 'Email:',
+          'education.title': 'Education',
+          'education.school': 'South China University of Technology',
+          'education.period': '2002.09 - 2006.07',
+          'education.major': 'E-commerce | Bachelor | Management',
+          'education.achievements': 'CET-4',
+          'work.title': 'Work Experience',
+          'contact.title': 'Contact Me',
+          'footer.copyright': '© 2025 Jacky. All Rights Reserved.',
+          'work.job1.period': '2024.05 – 2024.11',
+          'work.job1.company': 'IFF International Flavors & Fragrances',
+          'work.job1.title': 'Sample Transportation Manager',
+          'work.job1.description': 'Responsible for domestic transportation management of various flavor and fragrance samples, including order processing, logistics coordination, and inventory tracking.',
+          'work.job2.period': '2018.04 – 2022.02',
+          'work.job2.company': 'Foshan Tangfen Entertainment Information Technology Co., Ltd.',
+          'work.job2.title': 'Project Manager',
+          'work.job2.description': 'Responsible for enterprise resource negotiation, project application, project financing, and the entire process of enterprise listing',
+          'work.job2.achievement1': 'Established "Tangfen Entertainment Blockchain Platform", developed a blockchain-based copyright platform, achieving full-process digital management',
+          'work.job2.achievement2': 'Reached strategic cooperation with state-owned enterprises, including China Unicom Foshan Branch and ICBC Foshan Branch',
+          'work.job2.achievement3': 'Led the company\'s seed round financing, successfully introduced several well-known companies as shareholders, with financing amount reaching millions',
+          'work.job2.achievement4': 'Facilitated the company\'s recognition as a "Blockchain + Finance" technology enterprise by Guangdong Financial High-tech Zone, obtaining government support funds',
+          'work.job2.achievement5': 'Presided over the company\'s successful listing on the Guangdong Equity Exchange Center, enhancing the company\'s financing capability and market recognition',
+          'work.job3.period': '2012.12 – 2017.09',
+          'work.job3.company': 'Guangzhou Arite Information Technology Co., Ltd.',
+          'work.job3.title': 'Business Manager',
+          'work.job3.description': 'Responsible for the overall coordination of large-scale exhibition projects, focusing on electronic ticketing system solutions',
+          'work.job3.achievement1': '',
+          'work.job3.project1': '11th Guangzhou International Auto Show:',
+          'work.job3.project1.desc': 'Responsible for e-ticket online platform operation, channel development, ticket sales and on-site management',
+          'work.job3.achievement2': '',
+          'work.job3.project2': '10th Guangzhou International Auto Show:',
+          'work.job3.project2.desc': 'Responsible for bidding and ticketing solution development',
+          'work.job4.period': '2009.10 – 2012.11',
+          'work.job4.company': 'Guangdong City Online Ticketing Co., Ltd.',
+          'work.job4.title': 'Business Manager',
+          'work.job4.description': 'Fully responsible for the establishment of the business department team, personnel recruitment, new employee training, and the formulation of departmental performance plans, leading team partners to achieve planned goals together',
+          'work.job4.achievement1': '',
+          'work.job4.project1': '9th Guangzhou International Auto Show:',
+          'work.job4.project1.desc': 'Responsible for ticket sales channel development, marketing, and on-site TDM self-service ticket machine management',
+          'work.job4.achievement2': '',
+          'work.job4.project2': '2010 Guangzhou Asian Games Ticketing System Outsourcing:',
+          'work.job4.project2.desc': 'Participated with the Asian Games Organizing Committee in ticket policy formulation, venue group ticket management, offline ticket distribution channel management, and venue seating data management',
+          'work.job5.period': '2007.03 – 2009.07',
+          'work.job5.company': 'Guangzhou Jinding Optoelectronic Information Service Co., Ltd.',
+          'work.job5.title': 'Sales Manager',
+          'work.job5.description': 'Responsible for collecting project information, submitting solutions and quotations or bidding, and promoting project signing; regularly maintaining existing customers, exploring potential customers, and maintaining good relationships with customers; responsible for building sales teams, training new employees, breaking down sales tasks, and leading the team to achieve annual sales goals.',
+          'contact.phone': '13556159223',
+          'contact.email': '179328963@qq.com',
+          'contact.location': 'Guangzhou',
+          'footer.name': 'Jacky',
+          'footer.title': 'Project Management Expert | PMP Certified | AI Enabled',
+          'footer.quicklinks': 'Quick Links',
+          'footer.contactinfo': 'Contact Info',
+          'footer.phone': '📱 13556159223',
+          'footer.email': '📧 179328963@qq.com',
+          'footer.location': '📍 Guangzhou'
+        }
+      };
+      
+      // 获取语言按钮
+      const zhBtn = document.getElementById('lang-zh');
+      const enBtn = document.getElementById('lang-en');
+      
+      // 获取所有需要翻译的元素
+      const translatableElements = document.querySelectorAll('[data-i18n]');
+      
+      // 设置语言
+      function setLanguage(lang) {
+        // 更新按钮状态
+        if (lang === 'zh') {
+          zhBtn.classList.add('active');
+          enBtn.classList.remove('active');
+        } else {
+          enBtn.classList.add('active');
+          zhBtn.classList.remove('active');
+        }
+        
+        // 更新文本
+        translatableElements.forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (i18n[lang][key]) {
+            el.textContent = i18n[lang][key];
+          }
+        });
+        
+        // 保存语言偏好
+        localStorage.setItem('language', lang);
+      }
+      
+      // 初始化语言
+      const savedLanguage = localStorage.getItem('language') || 'zh';
+      setLanguage(savedLanguage);
+      
+      // 添加按钮事件监听器
+      zhBtn.addEventListener('click', () => setLanguage('zh'));
+      enBtn.addEventListener('click', () => setLanguage('en'));
+    }
+  </script>
+</body>
+</html>
